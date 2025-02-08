@@ -1,5 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ChatWidgetConfig } from './types';
+import { DataService } from '../services/data.service';
+import { Subscription } from 'rxjs';
+import { USERLIKE_EVENTS } from '../events/events';
 
 @Component({
   selector: 'app-chatwidget',
@@ -8,11 +12,20 @@ import { Component } from '@angular/core';
   styleUrl: './chatwidget.component.css'
 })
 export class ChatwidgetComponent {
-  public isChatBoxVisible: boolean = false;
-  constructor() {
+
+  public chatBoxSubscription!: Subscription;
+
+  @Input() chatWidgetConfig: ChatWidgetConfig = {
+    isClicked: false,
+    clickedInIcn: 'close',
+    clickedOutIcn: 'mode_comment'
   }
 
+  constructor(
+    private readonly _dataService: DataService,
+  ) { }
+
   public toggleWidget() {
-    this.isChatBoxVisible = !this.isChatBoxVisible;
+    this._dataService.sendMsgToChatWidgetSubscribers({ eventName: USERLIKE_EVENTS.TOGGLE_CLICK })
   }
 }
