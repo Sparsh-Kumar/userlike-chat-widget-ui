@@ -6,4 +6,3 @@ export type ChatBoxConfig = {
   chatBoxIncomingPara: string;
   chatBoxOutgoingPara: string;
 };
-

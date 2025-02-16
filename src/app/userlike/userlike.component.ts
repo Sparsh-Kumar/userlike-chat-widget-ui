@@ -1,26 +1,26 @@
 import { Component } from '@angular/core';
-import { ChatwidgetComponent } from '../chatwidget/chatwidget.component';
-import { ChatboxComponent } from '../chatbox/chatbox.component';
 import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
 import { ChatBoxConfig } from '../chatbox/types';
 import { ChatWidgetConfig } from '../chatwidget/types';
-import { DataService } from '../services/data.service';
-import { Subscription } from 'rxjs';
 import { LooseObject } from '../services/types';
-import { USERLIKE_EVENTS } from '../events/events';
+import { ChatwidgetComponent } from '../chatwidget/chatwidget.component';
+import { ChatboxComponent } from '../chatbox/chatbox.component';
+import UserlikeEvents from '../events/events';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-userlike',
   imports: [
     ChatwidgetComponent,
     ChatboxComponent,
-    CommonModule
+    CommonModule,
   ],
   templateUrl: './userlike.component.html',
-  styleUrl: './userlike.component.css'
+  styleUrl: './userlike.component.css',
 })
 export class UserlikeComponent {
-  public isChatBoxVisible: boolean = false;
+  public isChatBoxVisible = false;
 
   public chatBoxConfig: ChatBoxConfig = {
     chatBoxHeading: 'Chatbot',
@@ -28,16 +28,17 @@ export class UserlikeComponent {
     btnIcnChatBox: 'smart_toy',
     sendBtnIcn: 'send',
     chatBoxIncomingPara: 'Hi there 👋 How can I help you today?',
-    chatBoxOutgoingPara: 'Lorem ipsum dolor sit amet consectetur.'
-  }
+    chatBoxOutgoingPara: 'Lorem ipsum dolor sit amet consectetur.',
+  };
 
   public chatWidgetConfig: ChatWidgetConfig = {
     isClicked: this.isChatBoxVisible,
     clickedInIcn: 'close',
-    clickedOutIcn: 'mode_comment'
-  }
+    clickedOutIcn: 'mode_comment',
+  };
 
   public chatBoxSubscription!: Subscription;
+
   public chatWidgetSubscription!: Subscription;
 
   constructor(
@@ -45,20 +46,28 @@ export class UserlikeComponent {
   ) { }
 
   public ngOnInit() {
-    this.chatBoxSubscription = this._dataService.chatBoxMsg$.subscribe((payload: LooseObject = {}) => {
-      this.handleEventsPayload(payload);
-    })
-    this.chatWidgetSubscription = this._dataService.chatWidgetMsg$.subscribe((payload: LooseObject = {}) => {
-      this.handleEventsPayload(payload);
-    })
+    this.chatBoxSubscription = this._dataService.chatBoxMsg$.subscribe(
+      (
+        payload: LooseObject = {},
+      ) => {
+        this.handleEventsPayload(payload);
+      },
+    );
+    this.chatWidgetSubscription = this._dataService.chatWidgetMsg$.subscribe(
+      (
+        payload: LooseObject = {},
+      ) => {
+        this.handleEventsPayload(payload);
+      },
+    );
   }
 
   private handleEventsPayload(payload: LooseObject = {}) {
     const { eventName = '' } = payload;
-    if (eventName === USERLIKE_EVENTS.CLOSE_CHATBOX) {
+    if (eventName === UserlikeEvents.CLOSE_CHATBOX) {
       this.isChatBoxVisible = false;
     }
-    if (eventName === USERLIKE_EVENTS.TOGGLE_CLICK) {
+    if (eventName === UserlikeEvents.TOGGLE_CLICK) {
       this.isChatBoxVisible = !this.isChatBoxVisible;
       this.chatWidgetConfig.isClicked = this.isChatBoxVisible;
     }

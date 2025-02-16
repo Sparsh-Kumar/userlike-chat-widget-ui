@@ -8,9 +8,9 @@ describe('UserlikeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UserlikeComponent]
+      imports: [UserlikeComponent],
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(UserlikeComponent);
     component = fixture.componentInstance;

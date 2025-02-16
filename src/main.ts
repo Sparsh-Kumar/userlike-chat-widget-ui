@@ -1,6 +1,6 @@
 import { createApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
 import { createCustomElement } from '@angular/elements';
+import appConfig from './app/app.config';
 import { UserlikeComponent } from './app/userlike/userlike.component';
 
 createApplication(appConfig)

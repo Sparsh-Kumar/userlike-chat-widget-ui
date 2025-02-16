@@ -6,4 +6,4 @@
     document.body.appendChild(widget);
   };
   document.head.appendChild(script);
-})();
+}());

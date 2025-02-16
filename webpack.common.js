@@ -2,7 +2,7 @@ const path = require('path');
 const glob = require('glob');
 
 module.exports = {
-  entry: glob.sync("dist/**/*.{js,html,css}"),
+  entry: glob.sync('dist/**/*.{js,html,css}'),
   output: {
     filename: 'widget.bundle.js',
     path: path.resolve(__dirname, 'dist'),
@@ -29,10 +29,9 @@ module.exports = {
     ],
   },
   externals: {
-    angular: 'angular'
+    angular: 'angular',
   },
   resolve: {
     preferRelative: true,
   },
 };
-
