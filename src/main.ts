@@ -1,6 +1,11 @@
-import { bootstrapApplication } from '@angular/platform-browser';
+import { createApplication } from '@angular/platform-browser';
 import { appConfig } from './app/app.config';
-import { AppComponent } from './app/app.component';
+import { createCustomElement } from '@angular/elements';
+import { UserlikeComponent } from './app/userlike/userlike.component';
 
-bootstrapApplication(AppComponent, appConfig)
+createApplication(appConfig)
+  .then((app) => {
+    const UserLikeComp = createCustomElement(UserlikeComponent, { injector: app.injector });
+    customElements.define('userlike-widget', UserLikeComp);
+  })
   .catch((err) => console.error(err));
