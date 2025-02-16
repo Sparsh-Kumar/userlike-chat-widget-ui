@@ -4,10 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "npm run build:lib && npm run build:webpack",
-    "build:lib": "ng build --output-hashing=none",
+    "serve:lib": "node app.js",
+    "build": "ng build --output-hashing=none",
     "build:webpack": "npx webpack --config webpack.config.js",
-    "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
   "private": true,
@@ -35,13 +34,24 @@
     "@angular/cli": "^19.1.5",
     "@angular/compiler-cli": "^19.1.0",
     "@types/jasmine": "~5.1.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.8.1",
+    "html-loader": "^4.2.0",
+    "html-webpack-plugin": "^5.5.3",
     "jasmine-core": "~5.5.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "node-sass": "^9.0.0",
+    "sass-loader": "^13.3.2",
+    "style-loader": "^3.3.3",
+    "ts-loader": "^9.4.4",
     "typescript": "~5.7.2",
-    "webpack-cli": "^6.0.1"
+    "webpack": "^5.88.2",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^4.15.1",
+    "webpack-merge": "^5.9.0"
   }
 }
