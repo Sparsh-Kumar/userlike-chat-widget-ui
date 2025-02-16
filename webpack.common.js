@@ -11,18 +11,12 @@ module.exports = {
     globalObject: 'this',
     clean: true,
   },
-  mode: 'production',
-  devtool: 'source-map',
   module: {
     rules: [
       {
         test: /\.js$/,
-        use: 'babel-loader',
-      },
-      {
-        test: /\.ts(x)?$/,
-        loader: 'ts-loader',
         exclude: /node_modules/,
+        use: 'babel-loader',
       },
       {
         test: /\.html$/,
@@ -31,10 +25,6 @@ module.exports = {
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.(svg|png|jpg|gif)$/,
-        type: "asset/resource"
       },
     ],
   },
@@ -45,3 +35,4 @@ module.exports = {
     preferRelative: true,
   },
 };
+
